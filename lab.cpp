@@ -86,7 +86,7 @@ Summary lab_b(int num_jobs) {
 
 Summary lab_c(int num_jobs, int num_threads) {
   cout << "Running part C with " << num_jobs << " jobs and "
-       << num_threads << "threads." << endl;
+       << num_threads << " threads." << endl;
   assert(num_threads > 0);
   assert(num_jobs > 0);
   assert((num_jobs % num_threads) == 0
