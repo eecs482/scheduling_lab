@@ -1,0 +1,7 @@
+lab
+compile_commands.json
+*.o
+*.gch
+.DS_Store
+*.swo
+*.swp
