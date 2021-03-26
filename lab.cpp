@@ -43,15 +43,37 @@ Summary lab_c(int, int);
  * Do some "work."
  */
 void job() {
-  int sum = 0;
-  for (int i = 0; i < 100000000; ++i) { sum += i; }
+  int64_t sum = 0;
+  for (int64_t i = 0; i < 100000000; ++i) { sum += i; }
 }
 
 ///////////////////////////////////// MAIN /////////////////////////////////////
 int main() {
-  cout << lab_a() << endl;
-  cout << lab_b(32) << endl;
-  cout << lab_c(32, 4) << endl;
+  cout << "Running part A." << endl;
+  cout << lab_a() << endl << endl;
+  
+  cout << "Running part B with " << 32 << " consecutive jobs." << endl;
+  cout << lab_b(32) << endl << endl;
+
+  cout << "Running part C with " << 32 << " jobs and "
+      << 2 << " threads." << endl;
+  cout << lab_c(32, 2) << endl << endl;
+
+    cout << "Running part C with " << 32 << " jobs and "
+      << 4 << " threads." << endl;
+  cout << lab_c(32, 4) << endl << endl;
+
+  cout << "Running part C with " << 32 << " jobs and "
+      << 8 << " threads." << endl;
+  cout << lab_c(32, 8) << endl << endl;
+
+  cout << "Running part C with " << 32 << " jobs and "
+      << 16 << " threads." << endl;
+  cout << lab_c(32, 16) << endl << endl;
+
+  cout << "Running part C with " << 32 << " jobs and "
+      << 32 << " threads." << endl;
+  cout << lab_c(32, 32) << endl << endl;
 
   return 0;
 }
@@ -62,8 +84,6 @@ int main() {
 ////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// LAB EXERCISE IMPLEMENTATIONS /////////////////////////
 Summary lab_a() {
-  cout << "Running part A." << endl;
-
   auto start = gettimeofday();
   job();
   auto end = gettimeofday();
@@ -72,7 +92,6 @@ Summary lab_a() {
 }
 
 Summary lab_b(int num_jobs) {
-  cout << "Running part B with " << num_jobs << " consecutive jobs." << endl;
   assert(num_jobs >= 0);
 
   auto start = gettimeofday();
@@ -85,8 +104,6 @@ Summary lab_b(int num_jobs) {
 }
 
 Summary lab_c(int num_jobs, int num_threads) {
-  cout << "Running part C with " << num_jobs << " jobs and "
-       << num_threads << " threads." << endl;
   assert(num_threads > 0);
   assert(num_jobs > 0);
   assert((num_jobs % num_threads) == 0
