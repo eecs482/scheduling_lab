@@ -1,4 +1,14 @@
-CC=g++ -g3 -Wall -Wextra -std=c++17 -pthread
+CC = g++ main.cpp -std=c++17 -pthread -o main
+NUM_THREADS=1 2 4 8 16 32
 
-lab: lab.cpp
-	$(CC) -o $@ $^
+main: main.cpp
+	${CC}
+
+clean:
+	rm main
+
+part_b:
+	./main 1
+
+part_c:
+	$(foreach t,$(NUM_THREADS),./main $(t);)
