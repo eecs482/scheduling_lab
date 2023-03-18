@@ -14,9 +14,8 @@ double time_elapsed(const timeval& start, const timeval& end) {
 	return end.tv_sec - start.tv_sec + (end.tv_usec - start.tv_usec) / 1000000.0;
 }
 
-void job() {
-	struct timeval start, end;
-	gettimeofday(&start, nullptr);
+void job(timeval start) {
+	struct timeval end;
 	int total = 0;
 	for(int i = 0; i < 1000000; ++i) {
 		total += i;
@@ -29,9 +28,9 @@ void job() {
 	total_job_time += my_duration;
 }
 
-void batch(unsigned int count) {
+void batch(unsigned int count, timeval start) {
 	for (unsigned int i = 0; i < count; ++i) {
-		job();
+		job(start);
 	}
 }
 
@@ -54,7 +53,7 @@ int main(int argc, char** argv) {
 	std::vector<std::thread> threads(num_threads);
 	gettimeofday(&start, nullptr);
 	for (int i = 0; i < num_threads; ++i) {
-		threads[i] = std::thread(batch, NUM_JOBS / num_threads);
+		threads[i] = std::thread(batch, NUM_JOBS / num_threads, start);
 	}
 	for (auto& t : threads) {
 		t.join();
